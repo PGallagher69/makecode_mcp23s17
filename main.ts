@@ -124,7 +124,7 @@ function WriteRegister(ChipSelect: DigitalPin, Address: number, Register: Regist
 // Read from one of the MCP23S17 Registers
 // Set Address Register and Value before Calling
 // Result returned in the Result Variable
-function ReadRegister(ChipSelect: DigitalPin, Address: number, Register: Registers_Bank0): any {
+function ReadRegister(ChipSelect: DigitalPin, Address: number, Register: Registers_Bank0) {
     pins.digitalWritePin(ChipSelect, 0)
     let _command = OpCode_R | (Address << 1)
     let _result = pins.spiWrite(_command)
