@@ -68,7 +68,7 @@ enum Registers_Bank1 {
     GPIOA = 0x09,
     //% register=GPIOOutputLatchA
     OLATA = 0x0A,
-    
+
     //% register=IODirectionB
     IODIRB = 0x0B,
     //% register=IOPolarityB
@@ -97,8 +97,10 @@ enum Registers_Bank1 {
 let OpCode_W = 64
 let OpCode_R = 65
 
+//% color=190 weight=100 icon="\uf1ec" block="MCP23S17"
 namespace mcp23s17 {
 
+    //% block
     export function InitialiseMCP(ChipSelect: DigitalPin, Address: number) {
 
         pins.spiFrequency(1000000)
