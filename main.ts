@@ -175,13 +175,15 @@ namespace mcp23s17 {
     }
 
     // Read the Bank A Register
-    export function ReadBankA(ChipSelect: DigitalPin, Address: number) {
+    //% block
+    export function ReadBankA(ChipSelect: DigitalPin, Address: number) : number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOA)
         return _result
     }
 
     // Read the Bank B Register
-    export function ReadBankB(ChipSelect: DigitalPin, Address: number) {
+    //% block
+    export function ReadBankB(ChipSelect: DigitalPin, Address: number) : number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOB)
         return _result
     }
