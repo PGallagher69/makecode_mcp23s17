@@ -105,30 +105,30 @@ namespace mcp23s17 {
      * Initialise the MCP23S17 Chip to PJG Creations Defaults
      * 
     */
-    //% block
-    //% @param ChipSelect which pin the Chip Select Line is connected to
-    //% @param Address what address the Chip is wired to
-    export function InitialiseMCP(ChipSelect: DigitalPin, Address: number) {
+    //% blockId=initialise_mcp block="MCP Chip Select on %chipselect|with an Address of %address"
+    //% @param chipselect which pin the Chip Select Line is connected to
+    //% @param address what address the Chip is wired to
+    export function InitialiseMCP(chipselect: DigitalPin, address: number) {
 
         pins.spiFrequency(1000000)
 
-        SetupAddressMode(ChipSelect, Address)
-        SetAllBankAIOToInput(ChipSelect, Address)
-        SetAllBankBIOToInput(ChipSelect, Address)
-        SetAllBankAInputPullUpOn(ChipSelect, Address)
-        SetAllBankBInputPullUpOn(ChipSelect, Address)
+        SetupAddressMode(chipselect, address)
+        SetAllBankAIOToInput(chipselect, address)
+        SetAllBankBIOToInput(chipselect, address)
+        SetAllBankAInputPullUpOn(chipselect, address)
+        SetAllBankBInputPullUpOn(chipselect, address)
 
     }
 
     // Write to one of the MCP23S17 Registers
     // Set Address Register and Value before Calling
-    function WriteRegister(ChipSelect: DigitalPin, Address: number, Register: Registers_Bank0, Value: number) {
-        pins.digitalWritePin(ChipSelect, 0)
-        let _command = OpCode_W | (Address << 1)
+    function WriteRegister(chipselect: DigitalPin, address: number, Register: Registers_Bank0, Value: number) {
+        pins.digitalWritePin(chipselect, 0)
+        let _command = OpCode_W | (address << 1)
         let _result = pins.spiWrite(_command)
         _result = pins.spiWrite(Register)
         _result = pins.spiWrite(Value)
-        pins.digitalWritePin(ChipSelect, 1)
+        pins.digitalWritePin(chipselect, 1)
         return _result
     }
 
@@ -186,7 +186,7 @@ namespace mcp23s17 {
      * Read the Bank A Register
      * 
     */
-    //% block
+    //% blockId=read_bank_a block="MCP Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
     export function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
@@ -199,7 +199,7 @@ namespace mcp23s17 {
      * Read the Bank B Register
      * 
     */
-    //% block
+    //% blockId=read_bank_b block="MCP Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
     export function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
