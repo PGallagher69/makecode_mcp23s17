@@ -193,10 +193,10 @@ namespace mcp23s17 {
      * 
     */
     //% blockId=read_gpio block="Read Bank %bank|of MCP with a Chip Select on %chipselect|with an Address of %address"
+    //% @param Bank which Bank(s) to read
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
-    //% @param Bank which Bank(s) to read
-    export function ReadGPIO(ChipSelect: DigitalPin, Address: number, bank: Banks): number {
+    export function ReadGPIO(bank: Banks, ChipSelect: DigitalPin, Address: number): number {
 
         switch (bank)
         {
