@@ -93,12 +93,18 @@ enum Registers_Bank1 {
     OLATB = 0x15
 }
 
-
 let OpCode_W = 64
 let OpCode_R = 65
 
 //% color=#ED2522 weight=100 icon="\uf2db" block="MCP23S17"
 namespace mcp23s17 {
+
+    export enum Banks {
+        BankA = 0x01,
+        BankB = 0x02,
+        Both = 0x03
+    }
+
 
     /**
      *
@@ -183,13 +189,49 @@ namespace mcp23s17 {
 
     /**
      *
+     * Read the GPIO Pins
+     * 
+    */
+    //% blockId=read_gpio block="Read Bank %bank|of MCP with a Chip Select on %chipselect|with an Address of %address"
+    //% @param ChipSelect which pin the Chip Select Line is connected to
+    //% @param Address what address the Chip is wired to
+    //% @param Bank which Bank(s) to read
+    export function ReadGPIO(ChipSelect: DigitalPin, Address: number, bank: Banks): number {
+
+        switch (bank)
+        {
+            case Banks.BankA:
+
+                return ReadBankA(ChipSelect, Address)
+                break;
+
+            case Banks.BankB:
+
+                return ReadBankB(ChipSelect, Address)
+                break;
+
+            case Banks.Both:
+
+                let _bankAValue = ReadBankA(ChipSelect, Address)
+                let _bankBValue = ReadBankB(ChipSelect, Address)
+                return _bankAValue + _bankBValue
+
+            break;
+
+        }
+
+    }
+
+
+    /**
+     *
      * Read the Bank A Register
      * 
     */
     //% blockId=read_bank_a block="Read Bank A of MCP with a Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
-    export function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
+    function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOA)
         return _result
     }
@@ -202,7 +244,7 @@ namespace mcp23s17 {
     //% blockId=read_bank_b block="Read Bank B of MCP with a Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
-    export function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
+    function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOB)
         return _result
     }
