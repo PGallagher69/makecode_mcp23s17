@@ -106,8 +106,8 @@ namespace mcp23s17 {
      * 
     */
     //% block
-    //% param ChipSelect which pin the Chip Select Line is connected to
-    //% param Address what address the Chip is wired to
+    //% @param ChipSelect which pin the Chip Select Line is connected to
+    //% @param Address what address the Chip is wired to
     export function InitialiseMCP(ChipSelect: DigitalPin, Address: number) {
 
         pins.spiFrequency(1000000)
@@ -187,8 +187,8 @@ namespace mcp23s17 {
      * 
     */
     //% block
-    //% param ChipSelect which pin the Chip Select Line is connected to
-    //% param Address what address the Chip is wired to
+    //% @param ChipSelect which pin the Chip Select Line is connected to
+    //% @param Address what address the Chip is wired to
     export function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOA)
         return _result
@@ -200,8 +200,8 @@ namespace mcp23s17 {
      * 
     */
     //% block
-    //% param ChipSelect which pin the Chip Select Line is connected to
-    //% param Address what address the Chip is wired to
+    //% @param ChipSelect which pin the Chip Select Line is connected to
+    //% @param Address what address the Chip is wired to
     export function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOB)
         return _result
