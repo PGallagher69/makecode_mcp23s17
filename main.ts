@@ -99,12 +99,44 @@ let OpCode_R = 65
 //% color=#ED2522 weight=100 icon="\uf2db" block="MCP23S17"
 namespace mcp23s17 {
 
+    /**
+     * GPIO Banks
+     */
     export enum Banks {
         BankA = 0x01,
         BankB = 0x02,
         Both = 0x03
     }
 
+    /**
+     * GPIO Pin Numbers
+     */
+    export enum PinNos {
+        Pin1 = 0x01,
+        Pin2 = 0x02,
+        Pin3 = 0x03,
+        Pin4 = 0x04,
+        Pin5 = 0x05,
+        Pin6 = 0x06,
+        Pin7 = 0x07,
+        Pin8 = 0x08,
+        Pin9 = 0x09,
+        Pin10 = 0x0A,
+        Pin11 = 0x0B,
+        Pin12 = 0x0C,
+        Pin13 = 0x0D,
+        Pin14 = 0x0E,
+        Pin15 = 0x0F,
+        Pin16 = 0x10
+    }
+
+    /**
+     * GPIO Pin Values
+     */
+    enum PinValues {
+        High = 0x01,
+        Low = 0x00
+    }
 
     /**
      *
@@ -188,6 +220,20 @@ namespace mcp23s17 {
     }
 
     /**
+     * Read a GPIO Pin
+     */
+    //% blockId=read_gpio_pin block="Read GPIO %pinno|of MCP with a Chip Select on %chipselect|with an Address of %address"
+    //% @param pinno which Bank(s) to read
+    //% @param chipselect which pin the Chip Select Line is connected to
+    //% @param address what address the Chip is wired to
+    export function ReadGPIOPin(pinno: PinNos, chipselect: DigitalPin, address: number): PinValues {
+
+        let _GPIOValues = ReadGPIO(Banks.Both, chipselect, address)
+        let _PinValue = (1 << (pinno - 1)) ? PinValues.Low : PinValues.High;
+        return _PinValue
+    }
+
+    /**
      *
      * Read the GPIO Pins
      * 
@@ -198,8 +244,7 @@ namespace mcp23s17 {
     //% @param Address what address the Chip is wired to
     export function ReadGPIO(bank: Banks, ChipSelect: DigitalPin, Address: number): number {
 
-        switch (bank)
-        {
+        switch (bank) {
             case Banks.BankA:
 
                 return ReadBankA(ChipSelect, Address)
@@ -213,15 +258,14 @@ namespace mcp23s17 {
             case Banks.Both:
 
                 let _bankAValue = ReadBankA(ChipSelect, Address)
-                let _bankBValue = ReadBankB(ChipSelect, Address)
-                return _bankAValue + _bankBValue
+                let _bankBValue = ReadBankB(ChipSelect, Address) << 8
+                return _bankAValue | _bankBValue
 
-            break;
+                break;
 
         }
 
     }
-
 
     /**
      *
