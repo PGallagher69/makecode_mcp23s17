@@ -133,7 +133,7 @@ namespace mcp23s17 {
     /**
      * GPIO Pin Values
      */
-    enum PinValues {
+    export enum PinValues {
         High = 0x01,
         Low = 0x00
     }
