@@ -229,7 +229,7 @@ namespace mcp23s17 {
     export function ReadGPIOPin(pinno: PinNos, chipselect: DigitalPin, address: number): PinValues {
 
         let _GPIOValues = ReadGPIO(Banks.Both, chipselect, address)
-        let _PinValue = (1 << (pinno - 1)) ? PinValues.Low : PinValues.High;
+        let _PinValue = _GPIOValues & (1 << (pinno - 1)) ? PinValues.Low : PinValues.High;
         return _PinValue
     }
 
