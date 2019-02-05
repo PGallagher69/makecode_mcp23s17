@@ -97,7 +97,7 @@ enum Registers_Bank1 {
 let OpCode_W = 64
 let OpCode_R = 65
 
-//% color=190 weight=100 icon="\uf1ec" block="MCP23S17"
+//% color=#ED2522 weight=100 icon="\uf2db" block="MCP23S17"
 namespace mcp23s17 {
 
     /**
