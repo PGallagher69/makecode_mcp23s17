@@ -100,7 +100,14 @@ let OpCode_R = 65
 //% color=190 weight=100 icon="\uf1ec" block="MCP23S17"
 namespace mcp23s17 {
 
+    /**
+     *
+     * Initialise the MCP23S17 Chip to PJG Creations Defaults
+     * 
+    */
     //% block
+    //% param ChipSelect which pin the Chip Select Line is connected to
+    //% param Address what address the Chip is wired to
     export function InitialiseMCP(ChipSelect: DigitalPin, Address: number) {
 
         pins.spiFrequency(1000000)
@@ -174,16 +181,28 @@ namespace mcp23s17 {
         let _result = WriteRegister(ChipSelect, Address, Registers_Bank0.GPPUB, 255)
     }
 
-    // Read the Bank A Register
+    /**
+     *
+     * Read the Bank A Register
+     * 
+    */
     //% block
-    export function ReadBankA(ChipSelect: DigitalPin, Address: number) : number {
+    //% param ChipSelect which pin the Chip Select Line is connected to
+    //% param Address what address the Chip is wired to
+    export function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOA)
         return _result
     }
 
-    // Read the Bank B Register
+    /**
+     *
+     * Read the Bank B Register
+     * 
+    */
     //% block
-    export function ReadBankB(ChipSelect: DigitalPin, Address: number) : number {
+    //% param ChipSelect which pin the Chip Select Line is connected to
+    //% param Address what address the Chip is wired to
+    export function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
         let _result = ReadRegister(ChipSelect, Address, Registers_Bank0.GPIOB)
         return _result
     }
