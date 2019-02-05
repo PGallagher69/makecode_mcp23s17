@@ -105,7 +105,7 @@ namespace mcp23s17 {
      * Initialise the MCP23S17 Chip to PJG Creations Defaults
      * 
     */
-    //% blockId=initialise_mcp block="MCP Chip Select on %chipselect|with an Address of %address"
+    //% blockId=initialise_mcp block="Initialise MCP with a Chip Select connected to %chipselect|with an Address of %address"
     //% @param chipselect which pin the Chip Select Line is connected to
     //% @param address what address the Chip is wired to
     export function InitialiseMCP(chipselect: DigitalPin, address: number) {
@@ -186,7 +186,7 @@ namespace mcp23s17 {
      * Read the Bank A Register
      * 
     */
-    //% blockId=read_bank_a block="MCP Chip Select on %chipselect|with an Address of %address"
+    //% blockId=read_bank_a block="Read Bank A of MCP with a Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
     export function ReadBankA(ChipSelect: DigitalPin, Address: number): number {
@@ -199,7 +199,7 @@ namespace mcp23s17 {
      * Read the Bank B Register
      * 
     */
-    //% blockId=read_bank_b block="MCP Chip Select on %chipselect|with an Address of %address"
+    //% blockId=read_bank_b block="Read Bank B of MCP with a Chip Select on %chipselect|with an Address of %address"
     //% @param ChipSelect which pin the Chip Select Line is connected to
     //% @param Address what address the Chip is wired to
     export function ReadBankB(ChipSelect: DigitalPin, Address: number): number {
