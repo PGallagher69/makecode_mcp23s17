@@ -206,7 +206,23 @@ namespace mcp23s17 {
 
         }
 
-    }    
+    }
+
+    /**
+     * Create a new MCP23S17     * 
+     */
+    //% blockId="mcp_create" block="MCP23S17 with Chip Select on pin %chipselect|with and address of %address"
+    //% weight=90 blockGap=8
+    //% parts="mcp23s17"
+    //% trackArgs=0,2
+    //% blockSetVariable=MCPDevice
+    export function create(chipselect: DigitalPin, address: number): MCPDevice {
+        let mcp_device = new MCPDevice
+        mcp_device.chipselectpin = chipselect
+        mcp_device.address = address
+
+        return mcp_device
+    }
 
     // Write to one of the MCP23S17 Registers
     // Set Address Register and Value before Calling
@@ -269,7 +285,7 @@ namespace mcp23s17 {
         let _result = WriteRegister(ChipSelect, Address, Registers_Bank0.GPPUB, 255)
     }
 
-    
+
     /**
      *
      * Read the Bank A Register
