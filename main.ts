@@ -215,7 +215,7 @@ namespace mcp23s17 {
     //% weight=90 blockGap=8
     //% parts="mcp23s17"
     //% trackArgs=0,2
-    //% blockSetVariable=MCPDevice
+    //% blockSetVariable=mcp_device
     export function create(chipselect: DigitalPin, address: number): MCPDevice {
         let mcp_device = new MCPDevice
         mcp_device.chipselectpin = chipselect
