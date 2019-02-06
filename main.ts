@@ -165,7 +165,7 @@ namespace mcp23s17 {
         /**
          * Read a GPIO Pin
          */
-        //% blockId=read_gpio_pin block="Read GPIO %pinno|of %mcp_device"
+        //% blockId=read_gpio_pin block="Read %mcp_device|GPIO %pinno"
         //% @param pinno which Bank(s) to read
         ReadGPIOPin(pinno: PinNos): PinValues {
 
@@ -179,7 +179,7 @@ namespace mcp23s17 {
          * Read the GPIO Pins
          * 
         */
-        //% blockId=read_gpio block="Read GPIO Bank %bank|Pins of %mcp_device"
+        //% blockId=read_gpio block="Read %mcp_device|GPIO Bank %bank|Pins"
         //% @param Bank which Bank(s) to read
         ReadGPIO(bank: Banks): number {
 
