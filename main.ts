@@ -139,8 +139,8 @@ namespace mcp23s17 {
     }
 
     export class MCPDevice {
-        ChipSelectPin: DigitalPin
-        Address: number
+        chipselectpin: DigitalPin
+        address: number
 
         /**
          *
@@ -154,11 +154,11 @@ namespace mcp23s17 {
 
             pins.spiFrequency(1000000)
 
-            SetupAddressMode(mcp_device.ChipSelectPin, mcp_device.Address)
-            SetAllBankAIOToInput(mcp_device.ChipSelectPin, mcp_device.Address)
-            SetAllBankBIOToInput(mcp_device.ChipSelectPin, mcp_device.Address)
-            SetAllBankAInputPullUpOn(mcp_device.ChipSelectPin, mcp_device.Address)
-            SetAllBankBInputPullUpOn(mcp_device.ChipSelectPin, mcp_device.Address)
+            SetupAddressMode(this.chipselectpin, this.address)
+            SetAllBankAIOToInput(this.chipselectpin, this.address)
+            SetAllBankBIOToInput(this.chipselectpin, this.address)
+            SetAllBankAInputPullUpOn(this.chipselectpin, this.address)
+            SetAllBankBInputPullUpOn(this.chipselectpin, this.address)
 
         }
 
@@ -186,18 +186,18 @@ namespace mcp23s17 {
             switch (bank) {
                 case Banks.BankA:
 
-                    return ReadBankA(this.ChipSelectPin, this.Address)
+                    return ReadBankA(this.chipselectpin, this.address)
                     break;
 
                 case Banks.BankB:
 
-                    return ReadBankB(this.ChipSelectPin, this.Address)
+                    return ReadBankB(this.chipselectpin, this.address)
                     break;
 
                 case Banks.Both:
 
-                    let _bankAValue = ReadBankA(this.ChipSelectPin, this.Address)
-                    let _bankBValue = ReadBankB(this.ChipSelectPin, this.Address) << 8
+                    let _bankAValue = ReadBankA(this.chipselectpin, this.address)
+                    let _bankBValue = ReadBankB(this.chipselectpin, this.address) << 8
                     return _bankAValue | _bankBValue
 
                     break;
@@ -206,9 +206,7 @@ namespace mcp23s17 {
 
         }
 
-    }
-
-    
+    }    
 
     // Write to one of the MCP23S17 Registers
     // Set Address Register and Value before Calling
