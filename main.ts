@@ -138,6 +138,12 @@ namespace mcp23s17 {
         Low = 0x00
     }
 
+    export class MCPDevice
+    {
+        ChipSelectPin: DigitalPin
+        Address: number
+    }
+
     /**
      *
      * Initialise the MCP23S17 Chip to PJG Creations Defaults
@@ -146,15 +152,15 @@ namespace mcp23s17 {
     //% blockId=initialise_mcp block="Initialise MCP with a Chip Select connected to %chipselect|with an Address of %address"
     //% @param chipselect which pin the Chip Select Line is connected to
     //% @param address what address the Chip is wired to
-    export function InitialiseMCP(chipselect: DigitalPin, address: number) {
+    export function InitialiseMCP(mcp_device: MCPDevice) {
 
         pins.spiFrequency(1000000)
 
-        SetupAddressMode(chipselect, address)
-        SetAllBankAIOToInput(chipselect, address)
-        SetAllBankBIOToInput(chipselect, address)
-        SetAllBankAInputPullUpOn(chipselect, address)
-        SetAllBankBInputPullUpOn(chipselect, address)
+        SetupAddressMode(mcp_device.ChipSelectPin, mcp_device.Address)
+        SetAllBankAIOToInput(mcp_device.ChipSelectPin, mcp_device.Address)
+        SetAllBankBIOToInput(mcp_device.ChipSelectPin, mcp_device.Address)
+        SetAllBankAInputPullUpOn(mcp_device.ChipSelectPin, mcp_device.Address)
+        SetAllBankBInputPullUpOn(mcp_device.ChipSelectPin, mcp_device.Address)
 
     }
 
@@ -222,13 +228,12 @@ namespace mcp23s17 {
     /**
      * Read a GPIO Pin
      */
-    //% blockId=read_gpio_pin block="Read GPIO %pinno|of MCP with a Chip Select on %chipselect|with an Address of %address"
+    //% blockId=read_gpio_pin block="Read GPIO %pinno|of the MCP Device %mcp_device"
     //% @param pinno which Bank(s) to read
-    //% @param chipselect which pin the Chip Select Line is connected to
-    //% @param address what address the Chip is wired to
-    export function ReadGPIOPin(pinno: PinNos, chipselect: DigitalPin, address: number): PinValues {
+    //% @param mcp_device which is the MCP Device Defined
+    export function ReadGPIOPin(pinno: PinNos, mcp_device: MCPDevice): PinValues {
 
-        let _GPIOValues = ReadGPIO(Banks.Both, chipselect, address)
+        let _GPIOValues = ReadGPIO(Banks.Both, mcp_device)
         let _PinValue = _GPIOValues & (1 << (pinno - 1)) ? PinValues.Low : PinValues.High;
         return _PinValue
     }
@@ -238,27 +243,26 @@ namespace mcp23s17 {
      * Read the GPIO Pins
      * 
     */
-    //% blockId=read_gpio block="Read Bank %bank|of MCP with a Chip Select on %chipselect|with an Address of %address"
+    //% blockId=read_gpio block="Read GPIO Pins of Bank %bank|of the MCP Device %mcp_device"
     //% @param Bank which Bank(s) to read
-    //% @param ChipSelect which pin the Chip Select Line is connected to
-    //% @param Address what address the Chip is wired to
-    export function ReadGPIO(bank: Banks, ChipSelect: DigitalPin, Address: number): number {
+    //% @param mcp_device which is the MCP Device Defined
+    export function ReadGPIO(bank: Banks, mcp_device: MCPDevice): number {
 
         switch (bank) {
             case Banks.BankA:
 
-                return ReadBankA(ChipSelect, Address)
+                return ReadBankA(mcp_device.ChipSelectPin, mcp_device.Address)
                 break;
 
             case Banks.BankB:
 
-                return ReadBankB(ChipSelect, Address)
+                return ReadBankB(mcp_device.ChipSelectPin, mcp_device.Address)
                 break;
 
             case Banks.Both:
 
-                let _bankAValue = ReadBankA(ChipSelect, Address)
-                let _bankBValue = ReadBankB(ChipSelect, Address) << 8
+                let _bankAValue = ReadBankA(mcp_device.ChipSelectPin, mcp_device.Address)
+                let _bankBValue = ReadBankB(mcp_device.ChipSelectPin, mcp_device.Address) << 8
                 return _bankAValue | _bankBValue
 
                 break;
