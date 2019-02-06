@@ -147,7 +147,7 @@ namespace mcp23s17 {
          * Initialise the MCP23S17 Chip to PJG Creations Defaults
          * 
         */
-        //% blockId=initialise_mcp block="%mcp_device|Initialise MCP23S17 Device"
+        //% blockId=initialise_mcp block="Initialise %mcp_device"
         //% @param chipselect which pin the Chip Select Line is connected to
         //% @param address what address the Chip is wired to
         InitialiseMCP() {
@@ -165,7 +165,7 @@ namespace mcp23s17 {
         /**
          * Read a GPIO Pin
          */
-        //% blockId=read_gpio_pin block="%mcp_device|Read GPIO %pinno of MCP Device"
+        //% blockId=read_gpio_pin block="Read GPIO %pinno of %mcp_device"
         //% @param pinno which Bank(s) to read
         ReadGPIOPin(pinno: PinNos): PinValues {
 
@@ -179,7 +179,7 @@ namespace mcp23s17 {
          * Read the GPIO Pins
          * 
         */
-        //% blockId=read_gpio block="%mcp_device|Read GPIO Pins of Bank %bank of MCP Device"
+        //% blockId=read_gpio block="Read GPIO Bank %bank|Pins of %mcp_device"
         //% @param Bank which Bank(s) to read
         ReadGPIO(bank: Banks): number {
 
