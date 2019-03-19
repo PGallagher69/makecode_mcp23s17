@@ -209,7 +209,7 @@ namespace mcp23s17 {
     }
 
     /**
-     * Create a new MCP23S17     * 
+     * Create a new MCP23S17  
      */
     //% blockId="mcp_create" block="MCP23S17 with Chip Select on pin %chipselect|with and address of %address"
     //% weight=90 blockGap=8
